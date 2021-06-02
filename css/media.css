@@ -17,6 +17,9 @@
   /* Graph-ui Contents Style Code */
   .graph-ui>div.each-pofol{height:26%;}
   .graph-ui>div.total-pofol{height:40%;}
+
+  .chart{width:100%; height:100%;}
+  .chart canvas{width:85%!important; height:auto!important; top:50%; left:50%; transform:translate(-50%, -50%);}
 }
 
 @media screen and (max-width:768px){
@@ -39,6 +42,9 @@
 
   /* Table-ui Contents Style Code */
   .table-ui{height:auto; margin-top:10px; width:100%;}
+
+  .chart{width:100%; height:100%;}
+  .chart canvas{width:auto!important; height:75%!important; top:50%; left:50%; transform:translate(-50%, -50%);}
 }
 
 @media screen and (max-width:400px){
@@ -46,6 +52,7 @@
   header h2{width:20px;}
   header .gnb{display:none;}
   header .sign-out{display:none;}
+  .custom-font{font-size:60px;}
 
   .mobile-menu{display:block;}
 

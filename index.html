@@ -94,17 +94,17 @@
                 </span>
               </div>
               <div class="api-pofol">
-                <span class="chart" data-percent="50">
+                <span class="chart" data-percent="60">
                   <span class="percent"></span>
                 </span>
               </div>
               <div class="renewal-pofol">
-                <span class="chart" data-percent="45">
+                <span class="chart" data-percent="50">
                   <span class="percent"></span>
                 </span>
               </div>
               <div class="planning-pofol">
-                <span class="chart" data-percent="30">
+                <span class="chart" data-percent="35">
                   <span class="percent"></span>
                 </span>
               </div>
@@ -189,73 +189,50 @@
       $(".intro").lightSlider({
         item:1,
         pager:false,
-        loop: true,
         slideMargin: 0,
+        loop:true,
         speed: 400, //ms'
         auto: true,
         pause: 7000,
+        mode:'fade',
+        adaptiveHeight:true,
       });
     });
   </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var chart = window.chart = new EasyPieChart(document.querySelector('.each-graph .db-pofol span'), {
-        easing: 'easeOutElastic',
-        delay: 3000,
-        barColor: '#7c41f5',
-        trackColor: '#cab5f5',
-        scaleColor: false,
-        lineWidth: 10,
-        trackWidth: 8,
-        lineCap: 'butt',
-        onStep: function(from, to, percent) {
-          this.el.children[0].innerHTML = Math.round(percent);
-        }
-      });
 
-      var chart = window.chart = new EasyPieChart(document.querySelector('.each-graph .api-pofol span'), {
-        easing: 'easeOutElastic',
-        delay: 3000,
-        barColor: '#ff9062',
-        trackColor: '#f7ccba',
-        scaleColor: false,
-        lineWidth: 10,
-        trackWidth: 8,
-        lineCap: 'butt',
-        onStep: function(from, to, percent) {
-          this.el.children[0].innerHTML = Math.round(percent);
-        }
-      });
+      const poData = {
+        poElem1 : {a:'.db-pofol', b:'#7c41f5', c:'#c4aafa', d:5, e:4},
+        poElem2 : {a:'.api-pofol', b:'#ff9062', c:'#ffbca1', d:10, e:8},
+        poElem3 : {a:'.renewal-pofol', b:'#3acbe8', c:'#a2deeb', d:10, e:8},
+        poElem4 : {a:'.planning-pofol', b:'#69c', c:'#ace', d:10, e:8},
+      }
 
-      var chart = window.chart = new EasyPieChart(document.querySelector('.each-graph .renewal-pofol span'), {
-        easing: 'easeOutElastic',
-        delay: 3000,
-        barColor: '#3acbe8',
-        trackColor: '#b6e8f2',
-        scaleColor: false,
-        lineWidth: 10,
-        trackWidth: 8,
-        lineCap: 'butt',
-        onStep: function(from, to, percent) {
-          this.el.children[0].innerHTML = Math.round(percent);
-        }
-      });
-
-      var chart = window.chart = new EasyPieChart(document.querySelector('.each-graph .planning-pofol span'), {
-        easing: 'easeOutElastic',
-        delay: 3000,
-        barColor: '#7c41f5',
-        trackColor: '#cab5f5',
-        scaleColor: false,
-        lineWidth: 10,
-        trackWidth: 8,
-        lineCap: 'butt',
-        onStep: function(from, to, percent) {
-          this.el.children[0].innerHTML = Math.round(percent);
-        }
-      });
+      function startPie(poData){
+          for(prop in poData){
+            console.log(poData[prop].a);
+          
+            var chart = window.chart = new EasyPieChart(document.querySelector(poData[prop].a + ' .chart'), {
+            easing: 'easeOutElastic',
+            delay: 3000,
+            barColor: poData[prop].b,
+            trackColor: poData[prop].c,
+            scaleColor: false,
+            lineWidth: poData[prop].d,
+            trackWidth: poData[prop].e,
+            lineCap: 'round',
+            onStep: function(from, to, percent) {
+              this.el.children[0].innerHTML = Math.round(percent);
+            }
+          });
+        };
+      }
+      
+      startPie(poData)
     });
-    </script>
+	</script>
 
 </body>
 </html>
