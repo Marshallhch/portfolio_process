@@ -92,26 +92,44 @@
                 <span class="chart" data-percent="86">
                   <span class="percent"></span>
                 </span>
+                <b>DB Project</b>
+                <i class="fa fa-database"></i>
               </div>
               <div class="api-pofol">
                 <span class="chart" data-percent="60">
                   <span class="percent"></span>
                 </span>
+                <b>API Project</b>
+                <i class="fa fa-thermometer-half"></i>
               </div>
               <div class="renewal-pofol">
                 <span class="chart" data-percent="50">
                   <span class="percent"></span>
                 </span>
+                <b>Renewal Project</b>
+                <i class="fa fa-clone"></i>
               </div>
               <div class="planning-pofol">
                 <span class="chart" data-percent="35">
-                  <span class="percent"></span>
+                  <span class="percent"></span>            
                 </span>
+                <b>Planning Project</b>
+                <i class="fa fa-bar-chart-o"></i>
               </div>
             </div>
           </div>
         </div>
-        <div class="total-pofol"></div>
+        <div class="total-pofol">
+          <div class="total-chart">
+            <span class="chart" data-percent="35">
+              <span class="percent"></span> 
+              <h3>Total Process Rate</h3> 
+            </span>                 
+          </div>
+          <div class="total-txt">
+
+          </div>
+        </div>
       </section>
       <section class="table-ui">
         <div class="new-update">
@@ -180,59 +198,15 @@
     <!-- End of Main Dashboard Frame -->
   </div>
 
+  <!-- Jquery Framework Load -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Plugins Load -->
   <script src="/schedule/lib/js/lightslider.js"></script>
   <script src="/schedule/lib/js/easypiechart.js"></script>
+  <!-- Vanilla JS Code Load -->
   <script src="/schedule/js/index.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".intro").lightSlider({
-        item:1,
-        pager:false,
-        slideMargin: 0,
-        loop:true,
-        speed: 400, //ms'
-        auto: true,
-        pause: 7000,
-        mode:'fade',
-        adaptiveHeight:true,
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-      const poData = {
-        poElem1 : {a:'.db-pofol', b:'#7c41f5', c:'#c4aafa', d:5, e:4},
-        poElem2 : {a:'.api-pofol', b:'#ff9062', c:'#ffbca1', d:10, e:8},
-        poElem3 : {a:'.renewal-pofol', b:'#3acbe8', c:'#a2deeb', d:10, e:8},
-        poElem4 : {a:'.planning-pofol', b:'#69c', c:'#ace', d:10, e:8},
-      }
-
-      function startPie(poData){
-          for(prop in poData){
-            console.log(poData[prop].a);
-          
-            var chart = window.chart = new EasyPieChart(document.querySelector(poData[prop].a + ' .chart'), {
-            easing: 'easeOutElastic',
-            delay: 3000,
-            barColor: poData[prop].b,
-            trackColor: poData[prop].c,
-            scaleColor: false,
-            lineWidth: poData[prop].d,
-            trackWidth: poData[prop].e,
-            lineCap: 'round',
-            onStep: function(from, to, percent) {
-              this.el.children[0].innerHTML = Math.round(percent);
-            }
-          });
-        };
-      }
-      
-      startPie(poData)
-    });
-	</script>
+  <!-- jQuery Code Load -->
+  <script src="/schedule/js/jquery.index.js"></script>
 
 </body>
 </html>
