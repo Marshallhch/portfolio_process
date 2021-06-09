@@ -14,42 +14,15 @@ mobileMenu.onclick = () => {
 }
 
 //Pie Chart Rendering Code
-document.addEventListener('DOMContentLoaded', function () {
-  let lWidth = 10;
-  let tWidth = 8;
-  let eachSize = 110;
+$(function(){
+  $(window).ajaxComplete(function(){
+    let lWidth = 10;
+    let tWidth = 8;
+    let eachSize = 110;
 
-  let pieSize = 200;
-  let clearSet;
-  const winWidth = window.innerWidth;
-
-  if(winWidth <= 1280 && winWidth > 950){
-    pieSize = 150;
-  } else if(winWidth <= 950 && winWidth > 400) {
-    pieSize = 170;
-  } else if(winWidth <= 400) {
-    pieSize = 140;
-  } else {
-    pieSize = 200;
-  }
-
-  var chart = window.chart = new EasyPieChart(document.querySelector('.total-chart .chart'), {
-    easing: 'easeOutElastic',
-    delay: 3000,
-    barColor: '#7c41f5',
-    trackColor: '#c1a5fa',
-    scaleColor: false,
-    lineWidth: 18,
-    trackWidth: 18,
-    size: pieSize,
-    lineCap: 'butt',
-    onStep: function(from, to, percent) {
-       this.el.children[0].innerHTML = Math.round(percent);
-    }
-  });
-
-  window.addEventListener('resize', function(){
-    const winWidth = window.innerWidth;
+    let pieSize = 200;
+    let clearSet;
+    const winWidth = $(window).width();
 
     if(winWidth <= 1280 && winWidth > 950){
       pieSize = 150;
@@ -61,10 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
       pieSize = 200;
     }
 
-    clearTimeout(clearSet);
-    clearSet = setTimeout(function(){
-      document.querySelector('.total-chart .chart canvas').remove();
-      var chart = window.chart = new EasyPieChart(document.querySelector('.total-chart .chart'), {
+    // var chart = window.chart = new EasyPieChart(document.querySelector('.total-chart .chart'), {
+    $('.total-chart .chart').easyPieChart({
       easing: 'easeOutElastic',
       delay: 3000,
       barColor: '#7c41f5',
@@ -78,15 +49,50 @@ document.addEventListener('DOMContentLoaded', function () {
         this.el.children[0].innerHTML = Math.round(percent);
       }
     });
-    }, 150);
+
+    //window.addEventListener('resize', function(){
+    $(window).resize(function(){
+      const winWidth = $(window).width();
+
+      if(winWidth <= 1280 && winWidth > 950){
+        pieSize = 150;
+      } else if(winWidth <= 950 && winWidth > 400) {
+        pieSize = 170;
+      } else if(winWidth <= 400) {
+        pieSize = 140;
+      } else {
+        pieSize = 200;
+      }
+
+      console.log(pieSize);
+
+      clearTimeout(clearSet);
+      clearSet = setTimeout(function(){
+        $('.total-chart .chart').removeData('easyPieChart').find('canvas').remove();
+        //var chart = window.chart = new EasyPieChart(document.querySelector('.total-chart .chart'), {
+        $('.total-chart .chart').easyPieChart({
+        easing: 'easeOutElastic',
+        delay: 3000,
+        barColor: '#7c41f5',
+        trackColor: '#c1a5fa',
+        scaleColor: false,
+        lineWidth: 18,
+        trackWidth: 18,
+        size: pieSize,
+        lineCap: 'butt',
+        onStep: function(from, to, percent) {
+          this.el.children[0].innerHTML = Math.round(percent);
+        }
+      }, 150);
+    }); 
   });
 
-//------------each charts
+  //------------each charts
   if(winWidth <= 950){
     lWidth = 5;
-    tWidth = 4;
+    tWidth = 5;
   } else {
-    lWidth = 10;
+    lWidth = 8;
     tWidth = 8;
   }
 
@@ -95,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     eachSize = 110;
   }
+
+  //$(window).ajaxComplete(function(){
 
   const poData = [
     {poKind:'.db-pofol', bColor:'#7c41f5', tColor:'#c1a5fa'},
@@ -108,7 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
     poData.map(value => {
       //console.log(value.b);
       //document.querySelector(value.poKind + ' .chart canvas').remove();
-      var chart = window.chart = new EasyPieChart(document.querySelector(value.poKind + ' .chart'), {
+      //var chart = window.chart = new EasyPieChart(document.querySelector(value.poKind + ' .chart'), {
+      $(value.poKind + ' .chart').easyPieChart({
         easing: 'easeOutElastic',
         delay: 3000,
         barColor: value.bColor,
@@ -119,14 +128,15 @@ document.addEventListener('DOMContentLoaded', function () {
         size: eachSize,
         lineCap: 'round',
         onStep: function (from, to, percent) {
-        this.el.children[0].innerHTML = Math.round(percent);
+          this.el.children[0].innerHTML = Math.round(percent);
         }
       });
     });
   }
   startPie();
 
-}); 
+  });
+});
 
 //Open Modal for Input Rates
 //1. 버튼 DOM 저장 => index.php 134번줄
